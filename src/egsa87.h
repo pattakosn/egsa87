@@ -5,12 +5,12 @@
 extern "C" {
 #endif
 
-extern void wgs84egsa87(double philam[2], double xy[2]);
-extern void egsa87wgs84(double xy[2], double philam[2]);
+void wgs84egsa87(double philam[2], double xy[2]);
+void egsa87wgs84(double xy[2], double philam[2]);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* _EGSA87_H */
+#endif
 
