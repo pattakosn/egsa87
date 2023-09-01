@@ -3,8 +3,7 @@
 
 #include "egsa87.h"
 
-
-int main()
+int main(int argc, char *argv[])
 {
 // https://en.wikipedia.org/wiki/Morosini_Fountain
 double phlam[2]={35.3391370, 25.1331727};

@@ -16,6 +16,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_to_decimal_clicked()
 {
-    this->input
+
 }
 
