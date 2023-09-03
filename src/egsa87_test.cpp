@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 #include "egsa87.h"
 
 int main(int argc, char *argv[])
