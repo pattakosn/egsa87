@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,6 +17,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_to_decimal_clicked()
 {
-
+    auto lala = ui->input_text->toPlainText();
+    std::cout << lala.toStdString() << std::endl;
 }
 
