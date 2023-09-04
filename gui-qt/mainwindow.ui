@@ -67,7 +67,7 @@
     <item row="1" column="1">
      <widget class="QPushButton" name="to_EGSA87">
       <property name="text">
-       <string>to EGSA8</string>
+       <string>to EGSA87</string>
       </property>
      </widget>
     </item>
@@ -82,7 +82,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
