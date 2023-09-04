@@ -21,10 +21,10 @@ using std::sqrt, std::sin, std::cos;
 // xy contains the EGSA87 coordinates upon return (in meters)
 // 
 // Based on wgs84egsa87.m from https://github.com/mlourakis/egsa87
-void wgs84egsa87(double philam[2], double xy[2])
+coords wgs84egsa87(const coords in_radians)
 {
-        double phi = philam[0];
-        double lambda = philam[1];
+        double phi = in_radians.phi;
+        double lambda = in_radians.lambda;
 
 // wgs84_philambda_to_xy
 
@@ -111,23 +111,22 @@ void wgs84egsa87(double philam[2], double xy[2])
         y = y * kappa0 + yoffset;
 
         //gamma=t*L+t*L*L*L*(1.0+3*n2+4*n2*n2)/3+t*(2-t*t)*L*L*L*L*L/15;
-        xy[0] = x;
-        xy[1] = y;
+        return coords{x, y};
 }
 
 // xy contains the EGSA87 coordinates in meters
 // philam contains the latitude & longitude upon return (in radians)
 //
 // Based on egsa87wgs84.m from https://github.com/mlourakis/egsa87
-void egsa87wgs84(double xy[2], double philam[2])
+coords egsa87wgs84(const coords in_EGSA87_meters)//double xy[2])//, double philam[2])
 {
         const double kappa0 = 0.9996;   // PC_GR87_KAPPA
         const double lambda0 = (24.00 * M_PI / 180.00); // PC_GR87_LAMBDA0
         const double xoffset = 500000;  // PC_GR87_XOFFSET
         const double yoffset = 0.00;    // PC_GR87_YOFFSET
 
-        double x = xy[0];
-        double y = xy[1];
+        double x = in_EGSA87_meters.phi;//xy[0];
+        double y = in_EGSA87_meters.lambda;//xy[1];
 
 // xy_to_wgs84_philambda
 
@@ -221,6 +220,7 @@ void egsa87wgs84(double xy[2], double philam[2])
                 aradius = GE_WGS84_Alpha / sqrt(1 - e2 * sin(phi) * sin(phi));  // ellipsoid_main_normal_section_radius(phi);
                 phi = atan((z2 + e2 * aradius * sin(phi)) / sqrt(x2 * x2 + y2 * y2));
         }
-        philam[0] = phi;
-        philam[1] = lambda;
+        return coords{phi, lambda};
+	//philam[0] = phi;
+        //philam[1] = lambda;
 }
