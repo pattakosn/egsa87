@@ -72,7 +72,7 @@
      </widget>
     </item>
     <item row="2" column="0" colspan="5">
-     <widget class="QPlainTextEdit" name="plainTextEdit"/>
+     <widget class="QPlainTextEdit" name="output_text"/>
     </item>
    </layout>
   </widget>

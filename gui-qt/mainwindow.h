@@ -18,6 +18,8 @@ public:
 private slots:
     void on_to_decimal_clicked();
 
+    void on_to_EGSA87_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
