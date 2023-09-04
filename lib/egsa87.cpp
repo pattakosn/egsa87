@@ -1,13 +1,9 @@
-/////////////////////////////////////////////////////////////////////////////////////////////////
-//
 //  Convert geodetic coordinates from WGS84 to the HGRS87 (EGSA87/ΕΓΣΑ87) Greek geodetic system
 //  and vice versa.
 //
 //  Copyright (C) 2021  Manolis Lourakis (lourakis **at** ics.forth.gr)
 //  Institute of Computer Science, Foundation for Research & Technology - Hellas
 //  Heraklion, Crete, Greece.
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////
 #include <cmath>
 #include <limits>
 #include "egsa87.h"
@@ -17,14 +13,12 @@ static constexpr double GE_WGS84_F_INV = 298.257223563;
 
 using std::sqrt, std::sin, std::cos;
 
-// philam contains the latitude & longitude in radians
-// xy contains the EGSA87 coordinates upon return (in meters)
-// 
+// returns the EGSA87 coordinates in meters
 // Based on wgs84egsa87.m from https://github.com/mlourakis/egsa87
-coords wgs84egsa87(const coords in_radians)
+coords wgs84_to_egsa87(const coords wgs_in_degrees)
 {
-        double phi = in_radians.phi;
-        double lambda = in_radians.lambda;
+        double phi = wgs_in_degrees.phi * M_PI/180.0;
+        double lambda = wgs_in_degrees.lambda * M_PI/180.0;
 
 // wgs84_philambda_to_xy
 
@@ -114,11 +108,9 @@ coords wgs84egsa87(const coords in_radians)
         return coords{x, y};
 }
 
-// xy contains the EGSA87 coordinates in meters
-// philam contains the latitude & longitude upon return (in radians)
-//
+// returns the latitude & longitude in degrees
 // Based on egsa87wgs84.m from https://github.com/mlourakis/egsa87
-coords egsa87wgs84(const coords in_EGSA87_meters)//double xy[2])//, double philam[2])
+coords egsa87_to_wgs84(const coords in_EGSA87_meters)
 {
         const double kappa0 = 0.9996;   // PC_GR87_KAPPA
         const double lambda0 = (24.00 * M_PI / 180.00); // PC_GR87_LAMBDA0
@@ -220,7 +212,5 @@ coords egsa87wgs84(const coords in_EGSA87_meters)//double xy[2])//, double phila
                 aradius = GE_WGS84_Alpha / sqrt(1 - e2 * sin(phi) * sin(phi));  // ellipsoid_main_normal_section_radius(phi);
                 phi = atan((z2 + e2 * aradius * sin(phi)) / sqrt(x2 * x2 + y2 * y2));
         }
-        return coords{phi, lambda};
-	//philam[0] = phi;
-        //philam[1] = lambda;
+        return coords{phi * 180. / M_PI, lambda * 180. / M_PI};
 }

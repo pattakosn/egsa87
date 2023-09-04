@@ -5,8 +5,8 @@ struct coords {
 	double phi;
 	double lambda;
 };
-coords wgs84egsa87(const coords in_radians);//double philam[2]);
-coords egsa87wgs84(const coords in_EGSA87_meters);//double xy[2]);
+coords wgs84_to_egsa87(const coords in_radians);//double philam[2]);
+coords egsa87_to_wgs84(const coords in_EGSA87_meters);//double xy[2]);
 
 #endif
 
