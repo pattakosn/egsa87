@@ -28,7 +28,7 @@ void MainWindow::on_to_decimal_clicked()
 
     QString output;
     for ( size_t i = 0; i < list.size(); i+=2) {
-        coords result = wgs84_to_egsa87(coords{number_list[i], number_list[i+1]});
+        coords result = egsa87_to_wgs84(coords{number_list[i], number_list[i+1]});
         output += QString::fromStdString(std::to_string(result.phi) + " " + std::to_string(result.lambda) + ",");
     }
     ui->output_text->setPlainText(output);
@@ -47,7 +47,7 @@ void MainWindow::on_to_EGSA87_clicked()
 
     QString output;
     for ( size_t i = 0; i < list.size(); i+=2) {
-        coords result = egsa87_to_wgs84(coords{number_list[i], number_list[i+1]});
+        coords result = wgs84_to_egsa87(coords{number_list[i], number_list[i+1]});
         output += QString::fromStdString(std::to_string(result.phi) + " " + std::to_string(result.lambda) + ",");
     }
     ui->output_text->setPlainText(output);
